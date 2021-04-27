@@ -113,8 +113,12 @@ def find():
         print(i)
 
 def main():
-    readLibs()
+    try:
+        readLibs()
+    except:
+        pass
     location()
     find()
 
 main()
+input("Press Enter to Exit")
