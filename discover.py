@@ -19,8 +19,33 @@ def export():
     locations["steam"] = steamLoc
     locations["origin"] = originLoc
     locations["uplay"] = uplayLoc
-    with open('libraries.json', 'w') as json_file:
+    with open("libraries.json", "w") as json_file:
         json.dump(locations, json_file)
+
+def readLibs():
+    global steamLoc
+    global battleNetLoc
+    global originLoc
+    global uplayLoc
+    with open("libraries.json") as f:
+        data = json.load(f)
+        try:
+            battleNetLoc = data["battleNet"]
+        except:
+            pass
+        try:
+            steamLoc = data["steam"]
+        except:
+            pass
+        try:
+            originLoc = data["origin"]
+        except:
+            pass
+        try:
+            uplayLoc = data["uplayLoc"]
+        except:
+            pass
+    print(steamLoc)
 
 def steamAdd():
     steamLoc.append(filedialog.askdirectory())
@@ -42,7 +67,6 @@ def location():
         print("Origin")
         print("BattleNet")
         print("Uplay")
-        print("JSON")
         print("Export")
         print("finish")
         ans = input("")
@@ -89,6 +113,7 @@ def find():
         print(i)
 
 def main():
+    readLibs()
     location()
     find()
 
