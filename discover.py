@@ -1,5 +1,6 @@
 import os
 from tkinter import filedialog
+import json
 
 #steamLoc = ["C:\Program Files (x86)\Steam\steamapps\common","D:\Windows\Steam\steamapps\common"]
 steamLoc = []
@@ -12,6 +13,14 @@ origin = []
 uplayLoc = []
 uplay = []
 
+def export():
+    locations = {}
+    locations["battleNet"] = battleNetLoc
+    locations["steam"] = steamLoc
+    locations["origin"] = originLoc
+    locations["uplay"] = uplayLoc
+    with open('libraries.json', 'w') as json_file:
+        json.dump(locations, json_file)
 
 def steamAdd():
     steamLoc.append(filedialog.askdirectory())
@@ -34,6 +43,7 @@ def location():
         print("BattleNet")
         print("Uplay")
         print("JSON")
+        print("Export")
         print("finish")
         ans = input("")
         if ans == "Steam":
@@ -44,6 +54,8 @@ def location():
             originAdd()
         if ans == "Uplay":
             uplayAdd()
+        if ans == "Export":
+            export()
 
 def find():
     for i in steamLoc:
